@@ -1,0 +1,109 @@
+{%load staticfiles%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="ie9.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="static/css/ie9.css" /><![endif]-->
+    <noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
+    <title style="text-align:right">{% block title %}Login/Signup{% endblock %}</title>
+    <style>
+
+    table, th,  {
+    border: 1px solid white;
+    }
+
+
+    body{
+        height:100%;
+    }
+
+    .grandParentContaniner{
+        display:table; height:100%; margin: 0 auto;
+    }
+
+    .parentContainer{
+        display:table-cell; vertical-align:middle;
+        horizontal-align:middle;
+        padding: 50px;
+    }
+
+
+    .switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #000000;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(13px);
+}
+.slider.round {
+  border-radius: 25px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    </style>
+</head>
+
+<body style="background-color:rgb(203,198,113)">
+
+    <header>
+        <h1>My Site</h1>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" style="color:black">Logout </a> 
+        <a href="{% url 'add' %}" style="text-align:right" >Add </a>
+         {% else %}
+        <a href="/exp/mysite/templates/add.html" style="color:black">login</a> / <a href="{% url 'signup' %}" style="color:black">signup</a> {% endif %}
+        <hr>
+    </header>
+    <main>
+        {% block content %} {% endblock %}
+    </main>
+</body>
+
+</html>
+
+

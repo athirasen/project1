@@ -1,0 +1,70 @@
+{% extends 'base.html' %} {% block content %}
+<style>
+table{width: 60%;}
+td{
+   
+    text-align: left;
+    padding: 8px;
+	
+   
+}
+th {
+    
+    text-align: left;
+    padding: 8px;
+}
+
+</style>
+<h2>Welcome {{ user.get_full_name }} <small>{{ user.username }}</small>!</h2>
+
+<table>
+<tr>
+	<th>COMPONENT</th>
+	<th>ROOM</th>
+	<th>STATUS</th>
+</tr>
+{% for tech in techs %}
+	<tr>
+		<td>{{tech.name}}</td>
+		<td>{{tech.room}}</td>
+		<td>
+
+  
+  
+		<label class="switch">
+			<input onchange="checkBoxChecked(this)" type="checkbox" name="{{tech.id}}" 
+				{% if tech.status %}
+					checked
+				{% endif %}
+				/>
+			<span class="slider round"></span>
+		</label>
+		</td>
+
+	</tr>
+{% empty %}
+        <li>No techs yet.</li>
+{% endfor %}
+</table>
+<script>
+
+function httpGetAsync(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+
+function checkBoxChecked(checkBox){
+	getUrl = '/home/changestatus?name=' + checkBox.name + '&value=' + checkBox.checked;
+	httpGetAsync(getUrl, 
+		function(response){
+	});
+	//alert(' checkbox' + checkBox.name + ' was toggled to  ' + checkBox.checked);
+}
+</script>
+{% endblock %}

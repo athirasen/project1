@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2 style="text-align:center">SIGN IN</h2>
+  <div class="grandParentContaniner" style="width:300px;height:300px;border:1px solid #ffffff;">
+  <div class="parentContainer" >
+  <form method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+       <!-- {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}-->
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </div>
+</div>
+  </form>
+{% endblock %}

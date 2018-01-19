@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="text-align:center">LOGIN</h2>
+  {% if form.errors %}
+    <p style="color: red">Your username and password didn't match!!! Please try again.</p>
+  {% endif %}
+
+  <div class="grandParentContaniner" style="width:300px;height:300px;border:1px solid #ffffff;">
+  <div class="parentContainer" >
+
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% for field in form %}
+      <p style="color:black">
+        {{ field.label_tag }}<br>
+        {{ field }}<br>
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+        {% if field.help_text %}
+          <p><small style="color: black">{{ field.help_text }}</small></p>
+        {% endif %}
+      </p>
+    {% endfor %}
+    
+    <button type="submit">Login</button><br>
+    <a href="{% url 'signup' %}" style="color:white">New to My Site? Sign up</a>
+  </form>
+{% endblock %}
+</div>
+</div>
